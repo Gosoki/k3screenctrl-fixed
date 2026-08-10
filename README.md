@@ -51,6 +51,10 @@ ssh root@<路由器IP> 'chmod +x /usr/bin/k3screenctrl /etc/init.d/k3screenctrl 
 
 完整步骤（含依赖、校验、回滚）见 **[docs/INSTALL.md](docs/INSTALL.md)**。
 
+**网页设置界面**（系统 → Screen）：`opkg install luci-app-k3screenctrl luci-i18n-k3screenctrl-zh-cn`，
+源里没有时可手动部署仓库 `luci/` 下的 4 个文件 —— 详见
+[INSTALL.md 第 6 节](docs/INSTALL.md#6-luci-网页设置界面)。
+
 ---
 
 ## 修了什么
