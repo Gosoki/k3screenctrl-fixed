@@ -1,0 +1,24 @@
+--- a/src/scripts.c
++++ b/src/scripts.c
+@@ -16,16 +16,19 @@
+     }
+ 
+     ret = (char *)malloc(SCRIPT_OUTPUT_BUFFER_SIZE);
+-    if (ret < 0) {
++    if (ret == NULL) {
+         syslog(LOG_ERR, "could not allocate memory for command output: %s\n",
+                strerror(errno));
+         goto close_exit;
+     }
+ 
+-    if (fread(ret, 1, SCRIPT_OUTPUT_BUFFER_SIZE, fp) == 0) {
++    size_t nread = fread(ret, 1, SCRIPT_OUTPUT_BUFFER_SIZE - 1, fp);
++    if (nread == 0) {
+         syslog(LOG_ERR, "could not read from stream: %s\n", strerror(errno));
+         free(ret);
+         ret = NULL;
++    } else {
++        ret[nread] = '\0';
+     }
+ 
+ close_exit:

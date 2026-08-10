@@ -1,0 +1,18 @@
+--- a/src/main.c
++++ b/src/main.c
+@@ -13,6 +13,7 @@
+ #include "signals.h"
+ 
+ #include <errno.h>
++#include <time.h>
+ #include <poll.h>
+ #include <stdlib.h>
+ #include <string.h>
+@@ -141,6 +142,7 @@
+         return -EIO;
+     }
+ 
++    { extern time_t g_startup_time; g_startup_time = time(NULL); }
+     frame_set_received_callback(frame_handler);
+     request_mcu_version();
+     page_send_initial_data();

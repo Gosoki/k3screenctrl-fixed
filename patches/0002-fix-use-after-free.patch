@@ -1,0 +1,14 @@
+--- a/src/infocenter.c
++++ b/src/infocenter.c
+@@ -116,9 +116,10 @@
+      * be malformatted and the results are not reliable.
+      */
+     const char *stopped_at = tokenize_and_store(out, '\n', stores, store_len);
++    int result = (*stopped_at == 0) ? SUCCESS : FAILURE;
+     free((void *)out);
+ 
+-    return *stopped_at == 0 ? SUCCESS : FAILURE;
++    return result;
+ }
+ 
+ BASIC_INFO g_basic_info;

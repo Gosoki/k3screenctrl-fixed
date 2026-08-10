@@ -1,0 +1,32 @@
+--- a/src/mcu_proto.h
++++ b/src/mcu_proto.h
+@@ -76,17 +76,21 @@
+ } KEY_CODE;
+ 
+ /* REQUEST_SWITCH_PAGE */
++/* 本机 MCU（原厂屏幕固件）只有 5 页，实测扫描结果：
++ *   1=型号/固件/MAC  2=USB与网口  3=速率+WiFi设备数
++ *   4=WiFi SSID/密码 5=已接入终端   6、7 无效
++ * 原枚举按「7 屏改造版」编址，多出 UPGRADE 与 WEATHER，使页码整体后移。 */
+ typedef enum _page {
+-    PAGE_UPGRADE_INFO = 1,
+-    PAGE_BASIC_INFO,
+-    PAGE_PORTS,
+-    PAGE_WAN,
+-    PAGE_WEATHER,
+-    PAGE_WIFI,
+-    PAGE_HOSTS
++    PAGE_BASIC_INFO = 1,
++    PAGE_PORTS      = 2,
++    PAGE_WAN        = 3,
++    PAGE_WIFI       = 4,
++    PAGE_HOSTS      = 5,
++    PAGE_UPGRADE_INFO = 90,   /* 本机不存在，置于有效区间外 */
++    PAGE_WEATHER      = 91
+ } PAGE;
+ 
+-#define PAGE_MIN PAGE_UPGRADE_INFO
++#define PAGE_MIN PAGE_BASIC_INFO
+ #define PAGE_MAX PAGE_HOSTS
+ 
+ /* REQUEST_UPDATE_PORTS */

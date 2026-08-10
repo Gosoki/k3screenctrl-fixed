@@ -1,0 +1,10 @@
+*.o
+*.tar.gz
+k3screenctrl
+!release/k3screenctrl
+/build/
+/autom4te.cache/
+config.log
+config.status
+Makefile
+configure
